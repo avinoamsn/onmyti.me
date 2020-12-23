@@ -1,5 +1,19 @@
 {
   "private": true,
+  "scripts": {
+    "postinstall": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "workspaces": {
     "packages": [
       "api",
@@ -7,8 +21,13 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@redwoodjs/core": "^0.15.3",
-    "netlify-plugin-prisma-provider": "^0.3.0"
+    "husky": "^4.3.6",
+    "netlify-plugin-prisma-provider": "^0.3.0",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"
