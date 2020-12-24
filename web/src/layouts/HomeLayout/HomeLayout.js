@@ -1,5 +1,5 @@
 const HomeLayout = ({ children }) => (
-  <div className="bg-amber-200">{children}</div>
+  <div className="w-screen h-screen bg-yellow-100">{children}</div>
 )
 
 export default HomeLayout
