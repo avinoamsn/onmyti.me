@@ -1,16 +1,20 @@
-import { Link } from '@redwoodjs/router'
+import { isToday } from 'date-fns'
 
 import HomeLayout from 'src/layouts/HomeLayout'
+import Today from 'src/components/Today'
+import { usePersistentState } from 'src/hooks'
 
 const HomePage = () => {
+  const [focusedDate, setFocusedDate] = usePersistentState(
+    `focusedDate`,
+    new Date()
+  )
+
+  console.log(isToday(focusedDate))
+
   return (
     <HomeLayout>
-      <h1>HomePage</h1>
-      <p>Find me in "./web/src/pages/HomePage/HomePage.js"</p>
-      <p>
-        My default route is named "home", link to me with `
-        <Link to="home">routes.home()</Link>`
-      </p>
+      <Today isFocused={isToday(focusedDate)} />
     </HomeLayout>
   )
 }

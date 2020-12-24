@@ -6,4 +6,4 @@
 
 ### Bugs, features, suggestions
 
-- Feature: config option to use barrel file pattern for components (etc.)
+- Feature: config option to use barrel file pattern for components (etc.) - it appears this would be required to use the current dir import pattern w/ TS
