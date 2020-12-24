@@ -15,6 +15,8 @@ const UPDATE_ENTRY_MUTATION = gql`
   mutation UpdateEntryMutation($id: Int!, $input: UpdateEntryInput!) {
     updateEntry(id: $id, input: $input) {
       id
+      content
+      createdAt
     }
   }
 `

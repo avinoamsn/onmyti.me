@@ -1,6 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 
+import { QUERY } from 'src/components/EntriesCell'
+
 const DELETE_ENTRY_MUTATION = gql`
   mutation DeleteEntryMutation($id: Int!) {
     deleteEntry(id: $id) {
@@ -41,11 +43,16 @@ const EntriesList = ({ entries }) => {
     onCompleted: () => {
       addMessage('Entry deleted.', { classes: 'rw-flash-success' })
     },
+    // This refetches the query on the list page. Read more about other ways to
+    // update the cache over here:
+    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
+    refetchQueries: [{ query: QUERY }],
+    awaitRefetchQueries: true,
   })
 
   const onDeleteClick = (id) => {
     if (confirm('Are you sure you want to delete entry ' + id + '?')) {
-      deleteEntry({ variables: { id }, refetchQueries: ['ENTRIES'] })
+      deleteEntry({ variables: { id } })
     }
   }
 

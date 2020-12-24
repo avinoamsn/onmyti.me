@@ -7,7 +7,7 @@ export const schema = gql`
 
   type Query {
     entries: [Entry!]!
-    entry(id: Int!): Entry!
+    entry(id: Int!): Entry
   }
 
   input CreateEntryInput {

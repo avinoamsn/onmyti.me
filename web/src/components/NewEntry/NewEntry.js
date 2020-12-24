@@ -2,6 +2,8 @@ import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import EntryForm from 'src/components/EntryForm'
 
+import { QUERY } from 'src/components/EntriesCell'
+
 const CREATE_ENTRY_MUTATION = gql`
   mutation CreateEntryMutation($input: CreateEntryInput!) {
     createEntry(input: $input) {
