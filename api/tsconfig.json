@@ -10,7 +10,8 @@
     "paths": {
       "src/*": ["./src/*"]
     },
-    "typeRoots": ["../.redwood"]
+    "typeRoots": ["../.redwood"],
+    "types": [] // https://github.com/redwoodjs/redwood/issues/1400#issuecomment-719673834
   },
   "include": ["src"]
 }
