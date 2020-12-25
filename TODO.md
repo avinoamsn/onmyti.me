@@ -1,7 +1,8 @@
 # TODOs for onmyti.me
 
-### Project ideas & suggestions
+### Project ideas, suggestions & TODOs
 
+- Touch-up docs in the `usePersistentState` hook & c/p it into the custom hooks repo
 - It would be cool if the background amber/orange dimmed with the evening/night (e.g. transition `bg-amber-200` -> `bg-amber-400`, or similar)
 - Custom backgrounds? (Maybe different pastel colors)
 

@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { addDays, isToday, formatISO } from 'date-fns'
+import { useEffect, useState } from 'react'
+import { addDays, isToday, startOfToday, formatISO } from 'date-fns'
 import _ from 'lodash'
 
 import HomeLayout from 'src/layouts/HomeLayout'
@@ -10,10 +10,17 @@ const HomePage = () => {
   const scrollDir = useScrollDirection()
   const [focusedDate, setFocusedDate] = usePersistentState(
     `focusedDate`,
-    formatISO(new Date())
+    formatISO(startOfToday())
+  )
+  const [isTodayFocused, setIsTodayFocused] = useState(isToday(focusedDate))
+
+  useEffect(
+    () =>
+      isToday(focusedDate) ? setIsTodayFocused(true) : setIsTodayFocused(false),
+    [focusedDate]
   )
 
-  // capture wheel (scroll) interaction
+  // capture wheel (scroll) & arrow key (up/down) interaction
   useEffect(() => {
     const onScroll = _.debounce(
       () =>
@@ -39,7 +46,7 @@ const HomePage = () => {
 
   return (
     <HomeLayout>
-      <Today isFocused={isToday(focusedDate)} />
+      <Today isFocused={isTodayFocused} setFocusedDate={setFocusedDate} />
     </HomeLayout>
   )
 }

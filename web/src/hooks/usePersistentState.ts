@@ -13,8 +13,6 @@ export const usePersistentState = (
 ): [unknown, React.Dispatch<unknown>] => {
   const item = JSON.parse(localStorage.getItem(key)) || defaultValue
 
-  console.log(item)
-
   // use persisted state for an array only if its length
   // is the same as the defaultValue length otherwise you
   // may end up with an unpredictable state
