@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 
-import Entries from 'src/components/Entries'
+import Entries from 'src/components/EntryScaffold/Entries'
 
 export const QUERY = gql`
   query ENTRIES {

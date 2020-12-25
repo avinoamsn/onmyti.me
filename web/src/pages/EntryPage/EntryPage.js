@@ -1,5 +1,5 @@
 import EntriesLayout from 'src/layouts/EntriesLayout'
-import EntryCell from 'src/components/EntryCell'
+import EntryCell from 'src/components/EntryScaffold/EntryCell'
 
 const EntryPage = ({ id }) => {
   return (

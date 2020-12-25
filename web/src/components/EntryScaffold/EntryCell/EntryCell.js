@@ -1,4 +1,4 @@
-import Entry from 'src/components/Entry'
+import Entry from 'src/components/EntryScaffold/Entry'
 
 export const QUERY = gql`
   query FIND_ENTRY_BY_ID($id: Int!) {

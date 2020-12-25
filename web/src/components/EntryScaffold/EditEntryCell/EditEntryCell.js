@@ -1,6 +1,7 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
-import EntryForm from 'src/components/EntryForm'
+
+import EntryForm from 'src/components/EntryScaffold/EntryForm'
 
 export const QUERY = gql`
   query FIND_ENTRY_BY_ID($id: Int!) {
