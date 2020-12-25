@@ -8,5 +8,8 @@
   "[prisma]": {
     "editor.formatOnSave": true
   },
-  "css.customData": [".vscode/css.json"]
+  "css.customData": [".vscode/css.json"],
+  "files.associations": {
+    "*.css": "postcss"
+  }
 }

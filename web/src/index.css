@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply h-full overflow-hidden;
+}
+
 body {
-  @apply font-sans;
+  @apply font-sans font-light;
 }
