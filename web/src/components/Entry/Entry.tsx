@@ -39,8 +39,6 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
     [entryText]
   )
 
-  console.log(numLines)
-
   // re-focus input when `Today` is focused (autoFocus only covers page load)
   useEffect(() => {
     if (isFocused) document.getElementById('current-entry-input').focus()

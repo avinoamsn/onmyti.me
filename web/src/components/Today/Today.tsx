@@ -8,11 +8,16 @@ export const Today: React.FC<{
 }> = ({ isFocused, setFocusedDate }) => (
   <div
     id="today"
-    className={`transition-transform transform-gpu ${
-      isFocused ? `` : `translate-y-40 opacity-50 cursor-pointer`
+    className={`relative transition-transform transform-gpu ${
+      isFocused ? `` : `translate-y-40 opacity-50`
     }`}
-    onClick={() => (isFocused ? null : setFocusedDate(startOfToday()))}
   >
     <Entry isFocused={isFocused} />
+    {!isFocused ? (
+      <a
+        className="absolute top-0 w-full h-full cursor-pointer"
+        onClick={() => (isFocused ? null : setFocusedDate(startOfToday()))}
+      />
+    ) : null}
   </div>
 )
