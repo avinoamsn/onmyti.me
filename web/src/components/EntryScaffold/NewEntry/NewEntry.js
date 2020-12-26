@@ -1,6 +1,6 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
-import EntryForm from 'src/components/EntryForm'
+import EntryForm from 'src/components/EntryScaffold/EntryForm'
 
 import { QUERY } from 'src/components/EntryScaffold/EntriesCell'
 

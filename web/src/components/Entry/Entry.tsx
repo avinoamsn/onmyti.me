@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // import { returnSVG } from 'src/assets'
 import { usePersistentState } from 'src/hooks'
 
+const TEXTAREA_WIDTH = 416 // ? in px, for wordwrap logic
+
 /**
- * TODO improve this logic to be more declarative
- *
  * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
  *
  * @param {String} text The text to be rendered.
@@ -13,15 +13,16 @@ import { usePersistentState } from 'src/hooks'
  *
  * @see https://stackoverflow.com/a/21015393/5425359
  */
-function getTextWidth(text) {
+const getTextWidth = (text, font) => {
   // re-use canvas object for better performance
   const canvas =
     (getTextWidth as any).canvas ||
     ((getTextWidth as any).canvas = document.createElement('canvas'))
   const context = canvas.getContext('2d')
-  // context.font = font
+  context.font = font
+
   const metrics = context.measureText(text)
-  console.log(metrics)
+
   return metrics.width
 }
 
@@ -30,9 +31,13 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
 
   // numLines – re-calculated every time the input value changes
   const [numLines, setNumLines] = useState(1)
-  useEffect(() => setNumLines(Math.ceil(getTextWidth(entryText) / 239) || 1), [
-    entryText,
-  ])
+  useEffect(
+    () =>
+      setNumLines(
+        Math.ceil(getTextWidth(entryText, `18px Roboto`) / TEXTAREA_WIDTH) || 1
+      ),
+    [entryText]
+  )
 
   console.log(numLines)
 
@@ -57,7 +62,7 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
         autoFocus
         spellCheck
         disabled={isFocused ? false : true}
-        className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-light bg-transparent transition-all placeholder-black ${
+        className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
           isFocused ? `placeholder-opacity-50` : ``
         }`}
       ></textarea>
