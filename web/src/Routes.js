@@ -3,15 +3,27 @@ import { Router, Route } from '@redwoodjs/router'
 const Routes = () => {
   return (
     <Router>
-      {/* Entries Scaffold Pages */}
-      <Route path="/entries/new" page={NewEntryPage} name="newEntry" />
       <Route
-        path="/entries/{id:Int}/edit"
-        page={EditEntryPage}
-        name="editEntry"
+        path="/scaffolds/entries/new"
+        page={ScaffoldsNewEntryPage}
+        name="scaffoldsNewEntry"
       />
-      <Route path="/entries/{id:Int}" page={EntryPage} name="entry" />
-      <Route path="/entries" page={EntriesPage} name="entries" />
+      <Route
+        path="/scaffolds/entries/{id:Int}/edit"
+        page={ScaffoldsEditEntryPage}
+        name="scaffoldsEditEntry"
+      />
+      <Route
+        path="/scaffolds/entries/{id:Int}"
+        page={ScaffoldsEntryPage}
+        name="scaffoldsEntry"
+      />
+      <Route
+        path="/scaffolds/entries"
+        page={ScaffoldsEntriesPage}
+        name="scaffoldsEntries"
+      />
+      {/* Entries Scaffold Pages */}
 
       {/* Main Pages */}
       <Route path="/" page={HomePage} name="home" />

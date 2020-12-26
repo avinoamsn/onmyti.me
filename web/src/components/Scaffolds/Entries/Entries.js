@@ -1,7 +1,7 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 
-import { QUERY } from 'src/components/EntryScaffold/EntriesCell'
+import { QUERY } from 'src/components/Scaffolds/EntriesCell'
 
 const DELETE_ENTRY_MUTATION = gql`
   mutation DeleteEntryMutation($id: Int!) {
@@ -76,14 +76,14 @@ const EntriesList = ({ entries }) => {
               <td>
                 <nav className="rw-table-actions">
                   <Link
-                    to={routes.entry({ id: entry.id })}
+                    to={routes.scaffoldsEntry({ id: entry.id })}
                     title={'Show entry ' + entry.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
                     Show
                   </Link>
                   <Link
-                    to={routes.editEntry({ id: entry.id })}
+                    to={routes.scaffoldsEditEntry({ id: entry.id })}
                     title={'Edit entry ' + entry.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >

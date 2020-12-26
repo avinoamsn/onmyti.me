@@ -1,5 +1,5 @@
-import EntriesLayout from 'src/layouts/EntriesLayout'
-import EditEntryCell from 'src/components/EntryScaffold/EditEntryCell'
+import EntriesLayout from 'src/layouts/Scaffolds/EntriesLayout'
+import EditEntryCell from 'src/components/Scaffolds/EditEntryCell'
 
 const EditEntryPage = ({ id }) => {
   return (

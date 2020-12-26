@@ -1,5 +1,5 @@
-import EntriesLayout from 'src/layouts/EntriesLayout'
-import NewEntry from 'src/components/EntryScaffold/NewEntry'
+import EntriesLayout from 'src/layouts/Scaffolds/EntriesLayout'
+import NewEntry from 'src/components/Scaffolds/NewEntry'
 
 const NewEntryPage = () => {
   return (

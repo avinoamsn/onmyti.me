@@ -1,7 +1,7 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
-import { QUERY } from 'src/components/EntryScaffold/EntriesCell'
+import { QUERY } from 'src/components/Scaffolds/EntriesCell'
 
 const DELETE_ENTRY_MUTATION = gql`
   mutation DeleteEntryMutation($id: Int!) {
@@ -35,7 +35,7 @@ const Entry = ({ entry }) => {
   const { addMessage } = useFlash()
   const [deleteEntry] = useMutation(DELETE_ENTRY_MUTATION, {
     onCompleted: () => {
-      navigate(routes.entries())
+      navigate(routes.scaffoldsEntries())
       addMessage('Entry deleted.', { classes: 'rw-flash-success' })
     },
   })
@@ -73,7 +73,7 @@ const Entry = ({ entry }) => {
       </div>
       <nav className="rw-button-group">
         <Link
-          to={routes.editEntry({ id: entry.id })}
+          to={routes.scaffoldsEditEntry({ id: entry.id })}
           className="rw-button rw-button-blue"
         >
           Edit

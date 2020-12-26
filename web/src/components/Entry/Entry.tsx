@@ -1,43 +1,20 @@
 import { useEffect, useState } from 'react'
 
 // import { returnSVG } from 'src/assets'
-import { usePersistentState } from 'src/hooks'
+import { usePersistentState, useTextWidth } from 'src/hooks'
 
 const TEXTAREA_WIDTH = 416 // ? in px, for wordwrap logic
 
-/**
- * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
- *
- * @param {String} text The text to be rendered.
- * @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
- *
- * @see https://stackoverflow.com/a/21015393/5425359
- */
-const getTextWidth = (text, font) => {
-  // re-use canvas object for better performance
-  const canvas =
-    (getTextWidth as any).canvas ||
-    ((getTextWidth as any).canvas = document.createElement('canvas'))
-  const context = canvas.getContext('2d')
-  context.font = font
-
-  const metrics = context.measureText(text)
-
-  return metrics.width
-}
-
 export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
   const [entryText, setEntryText] = usePersistentState(`entryText`, ``)
+  const textWidth = useTextWidth(entryText, `18px Roboto`)
 
   // numLines – re-calculated every time the input value changes
   const [numLines, setNumLines] = useState(1)
-  useEffect(
-    () =>
-      setNumLines(
-        Math.ceil(getTextWidth(entryText, `18px Roboto`) / TEXTAREA_WIDTH) || 1
-      ),
-    [entryText]
-  )
+  useEffect(() => setNumLines(Math.ceil(textWidth / TEXTAREA_WIDTH) || 1), [
+    entryText,
+    textWidth,
+  ])
 
   // re-focus input when `Today` is focused (autoFocus only covers page load)
   useEffect(() => {

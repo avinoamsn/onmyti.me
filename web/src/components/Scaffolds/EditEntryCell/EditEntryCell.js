@@ -1,7 +1,6 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
-
-import EntryForm from 'src/components/EntryScaffold/EntryForm'
+import EntryForm from 'src/components/Scaffolds/EntryForm'
 
 export const QUERY = gql`
   query FIND_ENTRY_BY_ID($id: Int!) {
@@ -28,7 +27,7 @@ export const Success = ({ entry }) => {
   const { addMessage } = useFlash()
   const [updateEntry, { loading, error }] = useMutation(UPDATE_ENTRY_MUTATION, {
     onCompleted: () => {
-      navigate(routes.entries())
+      navigate(routes.scaffoldsEntries())
       addMessage('Entry updated.', { classes: 'rw-flash-success' })
     },
   })

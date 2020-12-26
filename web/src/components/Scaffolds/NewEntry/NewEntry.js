@@ -1,8 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
-import EntryForm from 'src/components/EntryScaffold/EntryForm'
+import EntryForm from 'src/components/Scaffolds/EntryForm'
 
-import { QUERY } from 'src/components/EntryScaffold/EntriesCell'
+import { QUERY } from 'src/components/Scaffolds/EntriesCell'
 
 const CREATE_ENTRY_MUTATION = gql`
   mutation CreateEntryMutation($input: CreateEntryInput!) {
@@ -16,7 +16,7 @@ const NewEntry = () => {
   const { addMessage } = useFlash()
   const [createEntry, { loading, error }] = useMutation(CREATE_ENTRY_MUTATION, {
     onCompleted: () => {
-      navigate(routes.entries())
+      navigate(routes.scaffoldsEntries())
       addMessage('Entry created.', { classes: 'rw-flash-success' })
     },
   })

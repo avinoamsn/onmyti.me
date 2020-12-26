@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 
-import Entries from 'src/components/EntryScaffold/Entries'
+import Entries from 'src/components/Scaffolds/Entries'
 
 export const QUERY = gql`
   query ENTRIES {
@@ -18,7 +18,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No entries yet. '}
-      <Link to={routes.newEntry()} className="rw-link">
+      <Link to={routes.scaffoldsNewEntry()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

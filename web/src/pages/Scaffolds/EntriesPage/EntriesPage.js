@@ -1,5 +1,5 @@
-import EntriesLayout from 'src/layouts/EntriesLayout'
-import EntriesCell from 'src/components/EntryScaffold/EntriesCell'
+import EntriesLayout from 'src/layouts/Scaffolds/EntriesLayout'
+import EntriesCell from 'src/components/Scaffolds/EntriesCell'
 
 const EntriesPage = () => {
   return (
