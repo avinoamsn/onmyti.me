@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 // import { returnSVG } from 'src/assets'
 import { usePersistentState, useTextWidth } from 'src/hooks'
+import { Clock } from '../Clock/Clock'
 
 const TEXTAREA_WIDTH = 416 // ? in px, for wordwrap logic
 
@@ -22,38 +23,42 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
   }, [isFocused])
 
   return (
-    <form id="current-entry" className="flex flex-col">
-      <textarea
-        id="current-entry-input"
-        name="entry-content"
-        placeholder={
-          isFocused ? `start typing...` : `click here to start a new entry`
-        }
-        value={entryText}
-        onChange={(e) => setEntryText(e.target.value)}
-        rows={numLines}
-        cols={50}
-        wrap="hard"
-        autoFocus
-        spellCheck
-        disabled={isFocused ? false : true}
-        className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
-          isFocused ? `placeholder-opacity-50` : ``
-        }`}
-      ></textarea>
+    <section className="flex">
+      <Clock />
 
-      <label htmlFor="current-entry-input">
-        return &crarr; to save your note
-      </label>
+      <form id="current-entry" className="flex flex-col">
+        <textarea
+          id="current-entry-input"
+          name="entry-content"
+          placeholder={
+            isFocused ? `start typing...` : `click here to start a new entry`
+          }
+          value={entryText}
+          onChange={(e) => setEntryText(e.target.value)}
+          rows={numLines}
+          cols={50}
+          wrap="hard"
+          autoFocus
+          spellCheck
+          disabled={isFocused ? false : true}
+          className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
+            isFocused ? `placeholder-opacity-50` : ``
+          }`}
+        ></textarea>
 
-      {/* used to calculate the width (and textwrap) for the textarea above */}
-      <div
-        id="current-entry-input-width"
-        className="absolute hidden whitespace-nowrap"
-      >
-        {entryText}
-      </div>
-    </form>
+        <label htmlFor="current-entry-input">
+          return &crarr; to save your note
+        </label>
+
+        {/* used to calculate the width (and textwrap) for the textarea above */}
+        <div
+          id="current-entry-input-width"
+          className="absolute hidden whitespace-nowrap"
+        >
+          {entryText}
+        </div>
+      </form>
+    </section>
   )
 }
 

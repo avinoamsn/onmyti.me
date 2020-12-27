@@ -11,7 +11,7 @@
       "src/*": ["./src/*"]
     },
     "typeRoots": ["../.redwood"],
-    "types": [] // https://github.com/redwoodjs/redwood/issues/1400#issuecomment-719673834
+    "types": ["jest"] // https://github.com/redwoodjs/redwood/issues/1400#issuecomment-719673834
   },
   "include": ["src"]
 }
