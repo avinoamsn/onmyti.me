@@ -1,2 +1,4 @@
-// @ts-expect-error
-declare module 'src/services/**/*.{js,ts}'
+
+          // @ts-expect-error
+          declare module 'src/services/**/*.{js,ts}';
+        

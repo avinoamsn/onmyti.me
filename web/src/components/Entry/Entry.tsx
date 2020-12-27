@@ -18,12 +18,6 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
     textWidth,
   ])
 
-  useEffect(() => {
-    console.log(document.getElementById('current-entry-input')?.clientWidth)
-  })
-
-  console.log(document.getElementById('current-entry-input')?.clientWidth)
-
   // re-focus input when `Today` is focused (autoFocus only covers page load)
   useEffect(() => {
     if (isFocused) document.getElementById('current-entry-input').focus()
@@ -52,7 +46,7 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
             isFocused ? `placeholder-opacity-50` : ``
           }`}
           css={`
-            max-width: 90vw;
+            max-width: 90vw; /* responsive on small (mobile) devices */
           `}
         />
 

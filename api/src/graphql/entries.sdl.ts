@@ -5,8 +5,14 @@ export const schema = gql`
     createdAt: DateTime!
   }
 
+  input TimeframeInput {
+    from: DateTime
+    to: DateTime
+  }
+
   type Query {
-    entries: [Entry!]!
+    entries(input: TimeframeInput): [Entry!]!
+    # entriesWithinTimeframe(input: TimeframeInput!): [Entry!]!
     entry(id: Int!): Entry
   }
 
