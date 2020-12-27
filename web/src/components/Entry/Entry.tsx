@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import { usePersistentState, useTextWidth } from 'src/hooks'
 import { Clock } from '../Clock/Clock'
 
-const TEXTAREA_WIDTH = 416 // ? in px, for wordwrap logic
+const TEXTAREA_WIDTH = document.getElementById('current-entry-input')
+  ?.clientWidth // ? in px, for wordwrap logic
 
 export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
   const [entryText, setEntryText] = usePersistentState(`entryText`, ``)
@@ -17,13 +18,19 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
     textWidth,
   ])
 
+  useEffect(() => {
+    console.log(document.getElementById('current-entry-input')?.clientWidth)
+  })
+
+  console.log(document.getElementById('current-entry-input')?.clientWidth)
+
   // re-focus input when `Today` is focused (autoFocus only covers page load)
   useEffect(() => {
     if (isFocused) document.getElementById('current-entry-input').focus()
   }, [isFocused])
 
   return (
-    <section className="flex">
+    <section className="flex flex-col sm:flex-row">
       <Clock />
 
       <form id="current-entry" className="flex flex-col">
@@ -44,7 +51,10 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
           className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
             isFocused ? `placeholder-opacity-50` : ``
           }`}
-        ></textarea>
+          css={`
+            max-width: 90vw;
+          `}
+        />
 
         <label htmlFor="current-entry-input">
           return &crarr; to save your note
