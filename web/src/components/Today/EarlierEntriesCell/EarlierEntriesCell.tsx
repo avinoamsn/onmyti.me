@@ -26,8 +26,6 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = (data) => {
-  console.log(data)
-  return null
-  // return <EarlierEntries entries={entries} />
+export const Success = ({ entries, isFocused }) => {
+  return <EarlierEntries entries={entries} isFocused={isFocused} />
 }

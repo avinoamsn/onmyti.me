@@ -1,21 +1,16 @@
 import { startOfToday } from 'date-fns'
-import { Dispatch } from 'react'
 
 import CurrentEntry from './CurrentEntry'
-import EarlierEntries from './EarlierEntries'
+import EarlierEntriesCell from './EarlierEntriesCell'
 
-export const Today: React.FC<{
-  isFocused: boolean
-  setFocusedDate: Dispatch<Date>
-}> = ({ isFocused, setFocusedDate }) => (
+export const Today = ({ isFocused, setFocusedDate }) => (
   <div
     id="today"
-    className={`relative transition-transform transform-gpu ${
+    className={`relative transition-all transform-gpu ${
       isFocused ? `` : `translate-y-40 opacity-50`
     }`}
   >
-    <EarlierEntries />
-
+    <EarlierEntriesCell isFocused={isFocused} />
     <CurrentEntry isFocused={isFocused} />
 
     {/* Anchor cover so that Today component is clickable when it isn't focused */}
@@ -27,3 +22,5 @@ export const Today: React.FC<{
     ) : null}
   </div>
 )
+
+export default Today
