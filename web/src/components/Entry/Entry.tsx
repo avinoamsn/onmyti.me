@@ -1,20 +1,49 @@
 import { useEffect, useState } from 'react'
-
-// import { returnSVG } from 'src/assets'
+// import { returnSVG } from 'src/assets' // ! SVG to use for return symbol
 import { usePersistentState, useTextWidth } from 'src/hooks'
+
+import { useMutation } from '@redwoodjs/web'
+
 import { Clock } from '../Clock/Clock'
 
 const TEXTAREA_WIDTH = document.getElementById('current-entry-input')
   ?.clientWidth // ? in px, for wordwrap logic
 
+const CREATE_ENTRY_MUTATION = gql`
+  mutation CreateEntryMutation($input: CreateEntryInput!) {
+    createEntry(input: $input) {
+      id
+    }
+  }
+`
+
 export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
-  const [entryText, setEntryText] = usePersistentState(`entryText`, ``)
-  const textWidth = useTextWidth(entryText, `18px Roboto`)
+  const [content, setContent] = usePersistentState(`content`, ``)
+  const textWidth = useTextWidth(content, `18px Roboto`)
+
+  // save entry mutation
+  const [createEntry] = useMutation(CREATE_ENTRY_MUTATION, {
+    onCompleted: () => setContent(``), // reset entry content
+  })
+  const onSave = (e) => {
+    if (e.code === `Enter`) {
+      e.preventDefault()
+      createEntry({
+        variables: { input: { content } },
+      })
+    }
+  }
+
+  // submit on return/enter (if content insn't empty)
+  useEffect(() => {
+    window.addEventListener('keydown', onSave)
+    return () => window.removeEventListener('keydown', onSave)
+  })
 
   // numLines – re-calculated every time the input value changes
   const [numLines, setNumLines] = useState(1)
   useEffect(() => setNumLines(Math.ceil(textWidth / TEXTAREA_WIDTH) || 1), [
-    entryText,
+    content,
     textWidth,
   ])
 
@@ -34,8 +63,8 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
           placeholder={
             isFocused ? `start typing...` : `click here to start a new entry`
           }
-          value={entryText}
-          onChange={(e) => setEntryText(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           rows={numLines}
           cols={50}
           wrap="hard"
@@ -59,7 +88,7 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
           id="current-entry-input-width"
           className="absolute hidden whitespace-nowrap"
         >
-          {entryText}
+          {content}
         </div>
       </form>
     </section>

@@ -11,7 +11,7 @@ export const Clock: React.FunctionComponent = () => {
     return () => clearInterval(timer)
   }, [])
 
-  return <span className="w-36 text-3xl">{format(time, `HH:mm:ss`)}</span>
+  return <span className="w-40 text-4xl">{format(time, `HH:mm:ss`)}</span>
 }
 
 export default Clock

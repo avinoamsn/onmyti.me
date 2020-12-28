@@ -13,6 +13,8 @@ export const Today: React.FC<{
     }`}
   >
     <Entry isFocused={isFocused} />
+
+    {/* Anchor cover so that Today component is clickable when it isn't focused */}
     {!isFocused ? (
       <a
         className="absolute top-0 w-full h-full cursor-pointer"
