@@ -4,10 +4,10 @@ import { usePersistentState, useTextWidth } from 'src/hooks'
 
 import { useMutation } from '@redwoodjs/web'
 
-import { Clock } from '../Clock/Clock'
+import { Clock } from '../../Clock/Clock'
 
 const TEXTAREA_WIDTH = document.getElementById('current-entry-input')
-  ?.clientWidth // ? in px, for wordwrap logic
+  ?.clientWidth // ? in px, for wordwrap logic (using invisible canvas)
 
 const CREATE_ENTRY_MUTATION = gql`
   mutation CreateEntryMutation($input: CreateEntryInput!) {
@@ -17,7 +17,9 @@ const CREATE_ENTRY_MUTATION = gql`
   }
 `
 
-export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
+export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
+  isFocused,
+}) => {
   const [content, setContent] = usePersistentState(`content`, ``)
   const textWidth = useTextWidth(content, `18px Roboto`)
 
@@ -95,4 +97,4 @@ export const Entry: React.FC<{ isFocused: boolean }> = ({ isFocused }) => {
   )
 }
 
-export default Entry
+export default CurrentEntry

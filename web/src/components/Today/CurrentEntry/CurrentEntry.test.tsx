@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import Entry from './Entry'
+import CurrentEntry from './CurrentEntry'
 
 describe('Entry', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Entry isFocused={true} />)
+      render(<CurrentEntry isFocused={true} />)
     }).not.toThrow()
   })
 })
@@ -13,7 +13,7 @@ describe('Entry', () => {
 describe('Entry', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Entry isFocused={false} />)
+      render(<CurrentEntry isFocused={false} />)
     }).not.toThrow()
   })
 })

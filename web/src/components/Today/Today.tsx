@@ -1,6 +1,8 @@
 import { startOfToday } from 'date-fns'
 import { Dispatch } from 'react'
-import Entry from 'src/components/Entry'
+
+import CurrentEntry from './CurrentEntry'
+import EarlierEntries from './EarlierEntries'
 
 export const Today: React.FC<{
   isFocused: boolean
@@ -12,7 +14,9 @@ export const Today: React.FC<{
       isFocused ? `` : `translate-y-40 opacity-50`
     }`}
   >
-    <Entry isFocused={isFocused} />
+    <EarlierEntries />
+
+    <CurrentEntry isFocused={isFocused} />
 
     {/* Anchor cover so that Today component is clickable when it isn't focused */}
     {!isFocused ? (

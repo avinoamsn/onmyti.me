@@ -3,6 +3,7 @@ import { Router, Route } from '@redwoodjs/router'
 const Routes = () => {
   return (
     <Router>
+      {/* Entries Scaffold Pages */}
       <Route
         path="/scaffolds/entries/new"
         page={ScaffoldsNewEntryPage}
@@ -23,7 +24,6 @@ const Routes = () => {
         page={ScaffoldsEntriesPage}
         name="scaffoldsEntries"
       />
-      {/* Entries Scaffold Pages */}
 
       {/* Main Pages */}
       <Route path="/" page={HomePage} name="home" />

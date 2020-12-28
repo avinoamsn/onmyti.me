@@ -2,6 +2,7 @@
 
 ### Project ideas, suggestions & TODOs
 
+- Implement some basic Storybook stories (at least to get a feel for the tool)
 - Arrow interaction currently both scrolls the textarea & the page, there should be a way to differentiate the two different actions (perhaps a setting optionally disabling arrow scroll if the user would prefer using arrows to navigate entry input text)
 - Replace ASCII carriage return w/ inline SVG (currently saved in `src/assets`)
 - multiple formatting options for the clock
