@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
+import Clock from 'src/components/Today/Clock'
 // import { returnSVG } from 'src/assets' // ! SVG to use for return symbol
 import { usePersistentState, useTextWidth } from 'src/hooks'
 
 import { useMutation } from '@redwoodjs/web'
-
-import { Clock } from '../../Clock/Clock'
 
 const TEXTAREA_WIDTH = document.getElementById('current-entry-input')
   ?.clientWidth // ? in px, for wordwrap logic (using invisible canvas)

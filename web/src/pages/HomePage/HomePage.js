@@ -5,6 +5,7 @@ import _ from 'lodash'
 import HomeLayout from 'src/layouts/HomeLayout'
 import Today from 'src/components/Today'
 import { usePersistentState, useScrollDirection } from 'src/hooks'
+import EarlierEntriesCell from 'src/components/Today/EarlierEntriesCell'
 
 const HomePage = () => {
   const scrollDir = useScrollDirection()
@@ -46,6 +47,7 @@ const HomePage = () => {
 
   return (
     <HomeLayout>
+      <EarlierEntriesCell />
       <Today isFocused={isTodayFocused} setFocusedDate={setFocusedDate} />
     </HomeLayout>
   )
