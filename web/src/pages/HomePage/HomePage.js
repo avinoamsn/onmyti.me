@@ -22,15 +22,6 @@ const HomePage = () => {
 
   // capture wheel (scroll) & arrow key (up/down) interaction
   useEffect(() => {
-    const onScroll = _.debounce(
-      () =>
-        scrollDir === 'up'
-          ? setFocusedDate(addDays(focusedDate, 1))
-          : setFocusedDate(addDays(focusedDate, -1)),
-      150
-    )
-    window.addEventListener('wheel', onScroll)
-
     const onArrowPress = (e) => {
       if (e.code === 'ArrowUp') setFocusedDate(addDays(focusedDate, 1))
       if (e.code === 'ArrowDown') setFocusedDate(addDays(focusedDate, -1))
@@ -39,7 +30,6 @@ const HomePage = () => {
 
     // rm subscriptions (avoid mem leak)
     return () => {
-      window.removeEventListener('wheel', onScroll)
       window.removeEventListener('keydown', onArrowPress)
     }
   })

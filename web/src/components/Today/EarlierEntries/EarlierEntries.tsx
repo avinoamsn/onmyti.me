@@ -4,13 +4,18 @@ export const EarlierEntries: React.FC<{
   entries: Entry[]
   isFocused: boolean
 }> = ({ entries, isFocused }) => (
-  <output className="max-w-xl flex flex-col">
+  <output
+    className="max-w-xl overflow-scroll flex flex-col"
+    css={`
+      max-height: 60vh;
+    `}
+  >
     {entries.map((e) => (
       <div
         key={e.id} // TODO unique keys across every array on HomePage
         className="flex flex-col sm:flex-row"
       >
-        <time className="w-40 pr-5 text-right">
+        <time className="w-40 pr-5 sm:text-right">
           {format(new Date(e.createdAt), `pp`)}
         </time>
 
