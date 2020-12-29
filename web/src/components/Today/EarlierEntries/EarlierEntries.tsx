@@ -7,13 +7,13 @@ export const EarlierEntries: React.FC<{
   isFocused: boolean
   entries: Entry[]
 }> = ({ isFocused, entries }) => {
-  // scroll to bottom of <output /> el on re-render (i.e. every new entry)
+  // scroll to bottom of <output /> el on new entry
   const earlierEntriesOutputRef = useRef<HTMLOutputElement>()
   useEffect(() => {
     if (earlierEntriesOutputRef.current)
       earlierEntriesOutputRef.current.scrollTop =
         earlierEntriesOutputRef.current?.scrollHeight
-  })
+  }, [entries])
 
   // determine whether the section is scrollable (conditionally
   // render UI that indicates scroll, like the bottom gradient)
@@ -37,7 +37,9 @@ export const EarlierEntries: React.FC<{
     <section ref={earlierEntriesSectionRef} className="relative">
       <output
         ref={earlierEntriesOutputRef}
-        className="overflow-scroll pb-3 flex flex-col" // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
+        className={`flex flex-col ${
+          isFocused ? `overflow-scroll` : `overflow-hidden`
+        } pb-3`} // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
         css={`
           max-height: 60vh; /* responsiveness */
         `}
