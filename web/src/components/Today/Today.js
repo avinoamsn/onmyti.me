@@ -1,7 +1,7 @@
 import { startOfToday } from 'date-fns'
 
 import CurrentEntry from './CurrentEntry'
-import EarlierEntriesCell from './EarlierEntriesCell'
+import EarlierEntries from './EarlierEntries'
 
 export const Today = ({ isFocused, setFocusedDate }) => (
   <div
@@ -10,7 +10,7 @@ export const Today = ({ isFocused, setFocusedDate }) => (
       isFocused ? `` : `translate-y-40 opacity-50`
     }`}
   >
-    <EarlierEntriesCell isFocused={isFocused} />
+    <EarlierEntries isFocused={isFocused} />
     <CurrentEntry isFocused={isFocused} />
 
     {/* Anchor cover so that Today component is clickable when it isn't focused */}

@@ -1,11 +1,39 @@
+import { useApolloClient, useQuery } from '@redwoodjs/web'
 import { format } from 'date-fns'
 import { useEffect, useRef, useState } from 'react'
-import useWindowWidth from 'src/hooks/useWindowWidth'
+import { useWindowWidth } from 'src/hooks'
+
+//   query CurrentDayEntries($input: TimeframeInput) {
+//     entries(input: $input) {
+//       id
+//       content
+//       createdAt
+//     }
+//   }
+// `
+
+const currentDayEntriesQuery = gql`
+  query CurrentDayEntries {
+    entries {
+      id
+      content
+      createdAt
+    }
+  }
+`
 
 export const EarlierEntries: React.FC<{
-  entries: Entry[]
   isFocused: boolean
-}> = ({ entries, isFocused }) => {
+}> = ({ isFocused }) => {
+  const [entries, setEntries] = useState<Entry[]>()
+
+  // query (moved out of Redwood Cell to circumvent auto-refreshing on `isFocused` update)
+  const client = useApolloClient()
+  useQuery(currentDayEntriesQuery, {
+    client,
+    onCompleted: ({ entries }) => setEntries(entries),
+  })
+
   // determine whether the section is scrollable (conditionally
   // render UI that indicates scroll, like the bottom gradient)
   const earlierEntriesSectionRef = useRef<HTMLDivElement>()
@@ -16,6 +44,8 @@ export const EarlierEntries: React.FC<{
     () =>
       earlierEntriesSectionRef &&
       earlierEntriesOutputRef &&
+      earlierEntriesOutputRef.current &&
+      earlierEntriesSectionRef.current &&
       earlierEntriesOutputRef.current.scrollHeight >
         earlierEntriesSectionRef.current.clientHeight
         ? setIsScrollable(true)
@@ -23,7 +53,7 @@ export const EarlierEntries: React.FC<{
     [windowWidth]
   )
 
-  return (
+  return entries ? (
     <section ref={earlierEntriesSectionRef} className="relative">
       <output
         ref={earlierEntriesOutputRef}
@@ -62,6 +92,8 @@ export const EarlierEntries: React.FC<{
         <div className="w-full h-7 absolute bottom-0 bg-gradient-to-t from-yellow-100" />
       ) : null}
     </section>
+  ) : (
+    <div>Loading...</div>
   )
 }
 
