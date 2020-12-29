@@ -26,7 +26,6 @@ export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
   const windowWidth = useWindowWidth()
   useEffect(() => {
     if (textAreaRef.current) setTextAreaWidth(textAreaRef.current.clientWidth)
-    console.log(textAreaRef.current.clientWidth)
   }, [textAreaRef, windowWidth])
 
   // save entry mutation

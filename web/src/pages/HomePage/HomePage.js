@@ -4,10 +4,9 @@ import _ from 'lodash'
 
 import HomeLayout from 'src/layouts/HomeLayout'
 import Today from 'src/components/Today'
-import { usePersistentState, useScrollDirection } from 'src/hooks'
+import { usePersistentState } from 'src/hooks'
 
 const HomePage = () => {
-  const scrollDir = useScrollDirection()
   const [focusedDate, setFocusedDate] = usePersistentState(
     `focusedDate`,
     formatISO(startOfToday())
