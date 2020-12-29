@@ -1,15 +1,23 @@
 import { format } from 'date-fns'
 import { useEffect, useRef, useState } from 'react'
 import { useWindowWidth } from 'src/hooks'
+import { clockFormat } from 'src/globals/clockFormat'
 
 export const EarlierEntries: React.FC<{
   isFocused: boolean
   entries: Entry[]
 }> = ({ isFocused, entries }) => {
+  // scroll to bottom of <output /> el on re-render (i.e. every new entry)
+  const earlierEntriesOutputRef = useRef<HTMLOutputElement>()
+  useEffect(() => {
+    if (earlierEntriesOutputRef.current)
+      earlierEntriesOutputRef.current.scrollTop =
+        earlierEntriesOutputRef.current?.scrollHeight
+  })
+
   // determine whether the section is scrollable (conditionally
   // render UI that indicates scroll, like the bottom gradient)
   const earlierEntriesSectionRef = useRef<HTMLDivElement>()
-  const earlierEntriesOutputRef = useRef<HTMLOutputElement>()
   const windowWidth = useWindowWidth() // used to execute effect hook on resize
   const [isScrollable, setIsScrollable] = useState(false)
   useEffect(
@@ -22,16 +30,16 @@ export const EarlierEntries: React.FC<{
         earlierEntriesSectionRef.current.clientHeight
         ? setIsScrollable(true)
         : setIsScrollable(false),
-    [entries, windowWidth]
+    [entries, earlierEntriesOutputRef, windowWidth]
   )
 
   return entries ? (
     <section ref={earlierEntriesSectionRef} className="relative">
       <output
         ref={earlierEntriesOutputRef}
-        className="max-w-xl overflow-scroll pb-3 flex flex-col" // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
+        className="overflow-scroll pb-3 flex flex-col" // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
         css={`
-          max-height: 60vh;
+          max-height: 60vh; /* responsiveness */
         `}
       >
         {entries.map((e) => (
@@ -40,13 +48,13 @@ export const EarlierEntries: React.FC<{
             className="flex flex-col sm:flex-row"
           >
             {/* Entry Date */}
-            <time className="w-40 pr-5 sm:text-right">
-              {format(new Date(e.createdAt), `pp`)}
+            <time className="w-52 pr-5 sm:text-right">
+              {format(new Date(e.createdAt), clockFormat)}
             </time>
 
             {/* Entry Content */}
             <p
-              className={`w-96 pb-4 font-sans font-light bg-transparent transition-all ${
+              className={`flex-1 pb-4 font-sans font-light bg-transparent transition-all ${
                 isFocused ? `opacity-50` : ``
               }`}
               css={`
@@ -65,7 +73,10 @@ export const EarlierEntries: React.FC<{
       ) : null}
     </section>
   ) : (
-    <div>Loading...</div>
+    <div className="pb-3 flex">
+      <span className="w-52 pr-5 sm:text-right">Loading...</span>
+      <span className="flex-1" />
+    </div>
   )
 }
 

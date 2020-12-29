@@ -34,7 +34,6 @@ export const CurrentEntry: React.FC<{
     onCompleted: () => {
       setContent(``) // reset entry content
       getEntries() // re-fetch entries
-      console.log('hit')
     },
   })
   const onSave = (e) => {
@@ -69,7 +68,7 @@ export const CurrentEntry: React.FC<{
     <section className="flex flex-col sm:flex-row">
       <Clock />
 
-      <form id="current-entry" className="flex flex-col">
+      <form id="current-entry" className="flex-1 flex flex-col">
         <textarea
           id="current-entry-input"
           name="entry-content"
@@ -84,12 +83,9 @@ export const CurrentEntry: React.FC<{
           spellCheck
           disabled={isFocused ? false : true}
           ref={textAreaRef}
-          className={`resize-none w-96 pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
+          className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
             isFocused ? `placeholder-opacity-50` : ``
           }`}
-          css={`
-            max-width: 90vw; /* responsive on small (mobile) devices */
-          `}
         />
 
         <label htmlFor="current-entry-input">

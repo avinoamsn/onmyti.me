@@ -8,7 +8,7 @@ export const HomeLayout = ({ children }) => {
   return (
     <div
       id="container"
-      className="w-screen h-screen flex justify-around items-center bg-yellow-100"
+      className="w-screen h-screen px-4 flex justify-around items-center bg-yellow-100"
     >
       {children}
     </div>

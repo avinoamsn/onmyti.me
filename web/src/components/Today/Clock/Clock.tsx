@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
+import { clockFormat } from 'src/globals/clockFormat'
 
 export const Clock: React.FunctionComponent = () => {
   const [time, setTime] = useState(new Date())
@@ -11,7 +12,11 @@ export const Clock: React.FunctionComponent = () => {
     return () => clearInterval(timer)
   }, [])
 
-  return <span className="w-40 text-4xl">{format(time, `HH:mm:ss`)}</span>
+  return (
+    <span className="w-52 pr-5 text-3xl sm:text-right whitespace-nowrap">
+      {format(time, clockFormat)}
+    </span>
+  )
 }
 
 export default Clock

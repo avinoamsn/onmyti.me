@@ -6,18 +6,9 @@ import { useApolloClient, useLazyQuery } from '@redwoodjs/web'
 import CurrentEntry from './CurrentEntry'
 import EarlierEntries from './EarlierEntries'
 
-//   query CurrentDayEntries($input: TimeframeInput) {
-//     entries(input: $input) {
-//       id
-//       content
-//       createdAt
-//     }
-//   }
-// `
-
 const currentDayEntriesQuery = gql`
-  query CurrentDayEntries {
-    entries {
+  query CurrentDayEntries($input: TimeframeInput) {
+    entries(input: $input) {
       id
       content
       createdAt
@@ -33,6 +24,7 @@ export const Today = ({ isFocused, setFocusedDate }) => {
   const [getEntries] = useLazyQuery(currentDayEntriesQuery, {
     client,
     fetchPolicy: 'cache-and-network', // ? the default setting fails to re-fetch
+    variables: { input: { from: startOfToday() } }, // ? fetch only today's entries
     onCompleted: ({ entries }) => setEntries(entries),
   })
   useEffect(() => getEntries(), [getEntries]) // initial query
@@ -40,7 +32,7 @@ export const Today = ({ isFocused, setFocusedDate }) => {
   return (
     <div
       id="today"
-      className={`relative transition-all transform-gpu ${
+      className={`max-w-xl flex-1 relative transition-all transform-gpu ${
         isFocused ? `` : `translate-y-40 opacity-50`
       }`}
     >
