@@ -14,9 +14,10 @@ const CREATE_ENTRY_MUTATION = gql`
   }
 `
 
-export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
-  isFocused,
-}) => {
+export const CurrentEntry: React.FC<{
+  isFocused: boolean
+  getEntries: () => void
+}> = ({ isFocused, getEntries }) => {
   const [content, setContent] = usePersistentState(`content`, ``)
 
   // text wrap logic (uses invisible element to calculate)
@@ -30,7 +31,11 @@ export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
 
   // save entry mutation
   const [createEntry] = useMutation(CREATE_ENTRY_MUTATION, {
-    onCompleted: () => setContent(``), // reset entry content
+    onCompleted: () => {
+      setContent(``) // reset entry content
+      getEntries() // re-fetch entries
+      console.log('hit')
+    },
   })
   const onSave = (e) => {
     if (e.code === `Enter`) {
