@@ -50,14 +50,14 @@ export const EarlierEntries: React.FC<{
         earlierEntriesSectionRef.current.clientHeight
         ? setIsScrollable(true)
         : setIsScrollable(false),
-    [windowWidth]
+    [entries, windowWidth]
   )
 
   return entries ? (
     <section ref={earlierEntriesSectionRef} className="relative">
       <output
         ref={earlierEntriesOutputRef}
-        className="max-w-xl overflow-scroll flex flex-col"
+        className="max-w-xl overflow-scroll pb-3 flex flex-col" // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
         css={`
           max-height: 60vh;
         `}
