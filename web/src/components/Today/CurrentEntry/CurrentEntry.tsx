@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
+import { createRef, useEffect, useState } from 'react'
 import Clock from 'src/components/Today/Clock'
 // import { returnSVG } from 'src/assets' // ! SVG to use for return symbol
 import { usePersistentState, useTextWidth } from 'src/hooks'
 
 import { useMutation } from '@redwoodjs/web'
-
-const TEXTAREA_WIDTH = document.getElementById('current-entry-input')
-  ?.clientWidth // ? in px, for wordwrap logic (using invisible canvas)
+import { useWindowWidth } from '../../../hooks/useWindowWidth'
 
 const CREATE_ENTRY_MUTATION = gql`
   mutation CreateEntryMutation($input: CreateEntryInput!) {
@@ -20,7 +18,16 @@ export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
   isFocused,
 }) => {
   const [content, setContent] = usePersistentState(`content`, ``)
+
+  // text wrap logic (uses invisible element to calculate)
   const textWidth = useTextWidth(content, `18px Roboto`)
+  const textAreaRef = createRef<HTMLTextAreaElement>()
+  const [textAreaWidth, setTextAreaWidth] = useState<number>()
+  const windowWidth = useWindowWidth()
+  useEffect(() => {
+    if (textAreaRef.current) setTextAreaWidth(textAreaRef.current.clientWidth)
+    console.log(textAreaRef.current.clientWidth)
+  }, [textAreaRef, windowWidth])
 
   // save entry mutation
   const [createEntry] = useMutation(CREATE_ENTRY_MUTATION, {
@@ -43,8 +50,9 @@ export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
 
   // numLines – re-calculated every time the input value changes
   const [numLines, setNumLines] = useState(1)
-  useEffect(() => setNumLines(Math.ceil(textWidth / TEXTAREA_WIDTH) || 1), [
+  useEffect(() => setNumLines(Math.ceil(textWidth / textAreaWidth) || 1), [
     content,
+    textAreaWidth,
     textWidth,
   ])
 
@@ -67,12 +75,12 @@ export const CurrentEntry: React.FC<{ isFocused: boolean }> = ({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={numLines}
-          cols={50}
           wrap="hard"
           autoFocus
           spellCheck
           disabled={isFocused ? false : true}
-          className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
+          ref={textAreaRef}
+          className={`resize-none w-96 pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
             isFocused ? `placeholder-opacity-50` : ``
           }`}
           css={`

@@ -1,6 +1,7 @@
 # TODOs for onmyti.me
 ### Project ideas, suggestions & TODOs
 
+- Re-work the cell system such that `Today` doesn't reload when it is focused/unfocused (the _Success_ switches to the _Loading_ cell when `isFocused` is updated)
 - system for unique keys across every array on HomePage
 - Implement some basic Storybook stories (at least to get a feel for the tool)
 - Arrow interaction currently both scrolls the textarea & the page, there should be a way to differentiate the two different actions (perhaps a setting optionally disabling arrow scroll if the user would prefer using arrows to navigate entry input text)
