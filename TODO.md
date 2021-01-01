@@ -1,4 +1,5 @@
 # TODOs for onmyti.me
+
 ### Project ideas, suggestions & TODOs
 
 - Re-work the cell system such that `Today` doesn't reload when it is focused/unfocused (the _Success_ switches to the _Loading_ cell when `isFocused` is updated)
@@ -18,6 +19,7 @@
 - documentation leaves something to be desired (not enough explicit use cases/examples)
 - TS support is not there yet (see: https://github.com/redwoodjs/redwood/issues/234)
   - The pages components & some core functions don't seem to have correct types (need to document further)
+  - Redwood compiles with babel w/ the typescript preset so the types are stripped out at compile time (unlike webpack's `ts-loader`) – I woould like the option of checking types at compile time & not just with a linter
 - **Despite the tighlt coupled prisma client & react frontend, I still need to manually write type defs for the front end (???)**
 - Scaffolding/generation options need to be expanded (see below)
 
