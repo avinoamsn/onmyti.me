@@ -12,7 +12,7 @@ export const Day: React.FC<{
         className="flex flex-col sm:flex-row"
       >
         {/* Entry Date */}
-        <time className="w-52 pr-5 sm:text-right">
+        <time className="w-28 pr-5 sm:text-right">
           {format(new Date(e.createdAt), clockFormat)}
         </time>
 

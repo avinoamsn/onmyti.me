@@ -16,7 +16,7 @@ const currentDayEntriesQuery = gql`
   }
 `
 
-export const Today = ({ isFocused, setFocusedDate, className }) => {
+export const Today = ({ isFocused, setFocusedDate }) => {
   const [entries, setEntries] = useState()
 
   // query (moved out of Redwood Cell to circumvent auto-refreshing on `isFocused` update)
@@ -32,9 +32,9 @@ export const Today = ({ isFocused, setFocusedDate, className }) => {
   return (
     <div
       id="today"
-      className={`max-w-xl relative transition-all transform-gpu ${
+      className={`max-w-xl w-full relative transition-all transform-gpu ${
         isFocused ? `` : `translate-y-40 opacity-50`
-      } ${className}`}
+      }`}
     >
       <EarlierEntries isFocused={isFocused} entries={entries} />
       <CurrentEntry isFocused={isFocused} getEntries={getEntries} />

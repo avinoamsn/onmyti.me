@@ -1,8 +1,8 @@
 # TODOs for onmyti.me
 
-### Project ideas, suggestions & TODOs
+### Project ideas & TODOs
 
-- Re-work the cell system such that `Today` doesn't reload when it is focused/unfocused (the _Success_ switches to the _Loading_ cell when `isFocused` is updated)
+- config options to either store journal locally (in `localStorage`) or log in through OAuth (Netlify)
 - system for unique keys across every array on HomePage
 - Implement some basic Storybook stories (at least to get a feel for the tool)
 - Arrow interaction currently both scrolls the textarea & the page, there should be a way to differentiate the two different actions (perhaps a setting optionally disabling arrow scroll if the user would prefer using arrows to navigate entry input text)
@@ -24,8 +24,9 @@
 - **Despite the tightly coupled prisma client & react frontend, I still need to manually write type defs for the front end (???)**
 - Scaffolding/generation options need to be expanded (see below)
 
-### Bugs, features, suggestions
+### RedwoodJS Bugs, features, suggestions
 
+- Re-work the cell system such that `Today` doesn't reload when it is focused/unfocused (the _Success_ switches to the _Loading_ cell when `isFocused` is updated)
 - Feature: config option to use barrel file pattern for components (etc.) - it appears this would be required to use the current dir import pattern w/ TS
 - Suggestion: Generate scaffold components inside a `<MODEL>Scaffold` dir
 - Bug: Generated model services don't extend the `...WhereUniqueInput` interface where applicable (e.g. in the `Update<Model>ModelArgs` interface, where both the input & id are required for the `update<Model>` function below – see `srvices/entries/entry` for more detail).

@@ -36,7 +36,7 @@ export const EarlierEntries: React.FC<{
     <section ref={earlierEntriesSectionRef} className="relative">
       <output
         ref={earlierEntriesOutputRef}
-        className={`flex flex-col ${
+        className={`ml-24 flex flex-col ${
           isFocused ? `overflow-scroll` : `overflow-hidden`
         } pb-3`} // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
         css={`
@@ -52,7 +52,7 @@ export const EarlierEntries: React.FC<{
       ) : null}
     </section>
   ) : (
-    <div className="pb-3 flex">
+    <div className="pb-7 flex">
       <span className="w-52 pr-5 sm:text-right">Loading...</span>
       <span className="flex-1" />
     </div>
