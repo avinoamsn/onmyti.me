@@ -20,7 +20,8 @@
 - TS support is not there yet (see: https://github.com/redwoodjs/redwood/issues/234)
   - The pages components & some core functions don't seem to have correct types (need to document further)
   - Redwood compiles with babel w/ the typescript preset so the types are stripped out at compile time (unlike webpack's `ts-loader`) – I woould like the option of checking types at compile time & not just with a linter
-- **Despite the tighlt coupled prisma client & react frontend, I still need to manually write type defs for the front end (???)**
+- Although Redwood provides the `src` dir as a root dir for package resolution, I think I prefer relative name resolution for in-project deps b/c it makes identifying project deps easier & the VSCode _Typescript Import Sorter_ extension organizes relative deps into their own section
+- **Despite the tightly coupled prisma client & react frontend, I still need to manually write type defs for the front end (???)**
 - Scaffolding/generation options need to be expanded (see below)
 
 ### Bugs, features, suggestions

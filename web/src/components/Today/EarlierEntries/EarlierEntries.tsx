@@ -1,7 +1,6 @@
-import { format } from 'date-fns'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import Day from 'src/components/Day'
 import { useWindowWidth } from 'src/hooks'
-import { clockFormat } from 'src/globals/clockFormat'
 
 export const EarlierEntries: React.FC<{
   isFocused: boolean
@@ -44,29 +43,7 @@ export const EarlierEntries: React.FC<{
           max-height: 60vh; /* responsiveness */
         `}
       >
-        {entries.map((e) => (
-          <div
-            key={e.id} // TODO unique keys across every array on HomePage
-            className="flex flex-col sm:flex-row"
-          >
-            {/* Entry Date */}
-            <time className="w-52 pr-5 sm:text-right">
-              {format(new Date(e.createdAt), clockFormat)}
-            </time>
-
-            {/* Entry Content */}
-            <p
-              className={`flex-1 pb-4 font-sans font-light bg-transparent transition-all ${
-                isFocused ? `opacity-50` : ``
-              }`}
-              css={`
-                max-width: 85vw; /* responsiveness */
-              `}
-            >
-              {e.content}
-            </p>
-          </div>
-        ))}
+        <Day entries={entries} isFocused={isFocused} />
       </output>
 
       {/* Bottom Gradient (hopefully indicative of the scroll action) */}
