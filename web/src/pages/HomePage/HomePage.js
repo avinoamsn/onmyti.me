@@ -46,16 +46,13 @@ const HomePage = () => {
 
   return (
     <HomeLayout>
-      <History
-        focusedDate={focusedDate}
-        setFocusedDate={setFocusedDate}
-        className="md:col-start-1 row-start-1"
-      />
-      <Today
-        isFocused={isTodayFocused}
-        setFocusedDate={setFocusedDate}
-        className="md:col-start-4 md:col-span-4 row-start-3"
-      />
+      <div className="md:col-start-1 md:col-span-3 flex items-start max-h-96 overflow-hidden">
+        <History focusedDate={focusedDate} setFocusedDate={setFocusedDate} />
+      </div>
+
+      <div className="md:col-start-4 md:col-span-4 flex items-center">
+        <Today isFocused={isTodayFocused} setFocusedDate={setFocusedDate} />
+      </div>
     </HomeLayout>
   )
 }

@@ -15,7 +15,7 @@ const previousEntriesQuery = gql`
   }
 `
 
-export const History: React.FC<{ className: string }> = ({ className }) => {
+export const History: React.FC<{ className?: string }> = ({ className }) => {
   const [entries, setEntries] = useState<Entry[]>()
 
   // query (moved out of Redwood Cell to circumvent auto-refreshing on `isFocused` update)
@@ -37,7 +37,7 @@ export const History: React.FC<{ className: string }> = ({ className }) => {
       <Day entries={entries} isFocused={false} />
     </div>
   ) : (
-    <div className="pb-3 flex">
+    <div className="pb-3 flex max-h-96">
       <span className="w-52 pr-5 sm:text-right">Loading...</span>
       <span className="flex-1" />
     </div>

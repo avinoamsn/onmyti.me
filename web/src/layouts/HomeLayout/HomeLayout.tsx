@@ -8,7 +8,7 @@ export const HomeLayout = ({ children }) => {
   return (
     <div
       id="container"
-      className="w-screen h-screen px-4 grid grid-cols-1 md:grid-cols-10 grid-rows-4 bg-yellow-100"
+      className="w-screen h-screen px-4 grid grid-cols-1 md:grid-cols-10 bg-yellow-100"
     >
       {children}
     </div>
