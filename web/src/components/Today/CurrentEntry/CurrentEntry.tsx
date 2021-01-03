@@ -65,7 +65,11 @@ export const CurrentEntry: React.FC<{
   }, [isFocused])
 
   return (
-    <section className="flex flex-col sm:flex-row">
+    <section
+      className={`flex flex-col sm:flex-row text-black ${
+        isFocused ? `` : `text-opacity-50`
+      }`}
+    >
       <Clock />
 
       <form id="current-entry" className="flex-1 flex flex-col">
@@ -83,8 +87,8 @@ export const CurrentEntry: React.FC<{
           spellCheck
           disabled={isFocused ? false : true}
           ref={textAreaRef}
-          className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black ${
-            isFocused ? `placeholder-opacity-50` : ``
+          className={`resize-none pb-1 border-b border-black focus:outline-none mb-2 font-sans font-light bg-transparent transition-all placeholder-black placeholder-opacity-50 ${
+            isFocused ? `` : `border-opacity-50`
           }`}
         />
 

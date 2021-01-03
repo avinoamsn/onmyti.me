@@ -6,11 +6,10 @@ export const HomeLayout = ({ children }) => {
   useEffect(() => disableBodyScroll(document.querySelector('#container')), [])
 
   return (
-    <div
-      id="container"
-      className="w-screen h-screen px-4 grid grid-cols-1 md:grid-cols-10 bg-yellow-100"
-    >
-      {children}
+    <div id="container" className="w-screen h-screen p-2 bg-yellow-100">
+      <div className="h-4/5 grid grid-cols-1 md:grid-cols-10 relative">
+        {children}
+      </div>
     </div>
   )
 }

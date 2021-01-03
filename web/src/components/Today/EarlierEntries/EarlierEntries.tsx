@@ -36,8 +36,8 @@ export const EarlierEntries: React.FC<{
     <section ref={earlierEntriesSectionRef} className="relative">
       <output
         ref={earlierEntriesOutputRef}
-        className={`ml-24 flex flex-col ${
-          isFocused ? `overflow-scroll` : `overflow-hidden`
+        className={`ml-24 flex flex-col text-black ${
+          isFocused ? `overflow-scroll` : `overflow-hidden text-opacity-50`
         } pb-3`} // bottom padding to make sure descenders (e.g. "g", "y") aren't occluded by the scroll gradient
         css={`
           max-height: 60vh; /* responsiveness */
