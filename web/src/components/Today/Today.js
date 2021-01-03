@@ -1,5 +1,7 @@
 import { startOfToday } from 'date-fns'
 import { useEffect, useState } from 'react'
+import { Flipper, Flipped } from 'react-flip-toolkit'
+import _ from 'lodash'
 
 import { useApolloClient, useLazyQuery } from '@redwoodjs/web'
 
@@ -29,11 +31,41 @@ export const Today = ({ isFocused, setFocusedDate }) => {
   })
   useEffect(() => getEntries(), [getEntries]) // initial query
 
+  // arr used to flip element order on focus/unfocus with react-flip-toolkit
+  const [todayEls, setTodayEls] = useState()
+  useEffect(() => {
+    const elList = [
+      {
+        src: (
+          <EarlierEntries
+            isFocused={isFocused}
+            entries={entries}
+            id="earlier-entries"
+          />
+        ),
+      },
+      {
+        src: (
+          <CurrentEntry
+            isFocused={isFocused}
+            getEntries={getEntries}
+            id="current-entry"
+          />
+        ),
+      },
+    ]
+
+    isFocused
+      ? setTodayEls([...elList])
+      : setTodayEls([...elList.slice().reverse()])
+  }, [isFocused, entries, getEntries])
+
+  console.log(
+    todayEls && `${todayEls[0].src.props.id + todayEls[1].src.props.id}`
+  )
   return (
     <div
       id="today"
-      // ! the second parent here was initially meant to hack a gradient-colored border, but it's not currently used that way and couild be refactored out (the below comment explains the original thinking)
-      // ? `via-yellow-100` hack used to start gradient earlier up in the component (so the border bg doesn't extend to the bottom) – `bg-gradient-to-b from-black via-yellow-100 to-yellow-100`
       className={`w-full max-w-xl border-2 border-yellow-100 rounded-lg absolute -translate-x-1/2 left-1/2 transition-all transform-gpu ${
         isFocused ? `-translate-y-1/2 top-1/2 border-opacity-0` : `top-full`
       }`}
@@ -45,8 +77,18 @@ export const Today = ({ isFocused, setFocusedDate }) => {
             : `border-opacity-50  bg-opacity-100`
         }`}
       >
-        <EarlierEntries isFocused={isFocused} entries={entries} />
-        <CurrentEntry isFocused={isFocused} getEntries={getEntries} />
+        {todayEls ? (
+          <Flipper
+            flipKey={`${todayEls[0].src.props.id + todayEls[1].src.props.id}`}
+            spring={{ stiffness: 750, damping: 50 }}
+          >
+            {todayEls.map((el) => (
+              <Flipped key={el.src.props.id} flipId={el.src.props.id}>
+                {el.src}
+              </Flipped>
+            ))}
+          </Flipper>
+        ) : null}
       </div>
 
       {/* Anchor cover so that Today component is clickable when it isn't focused */}

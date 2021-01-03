@@ -17,7 +17,8 @@ const CREATE_ENTRY_MUTATION = gql`
 export const CurrentEntry: React.FC<{
   isFocused: boolean
   getEntries: () => void
-}> = ({ isFocused, getEntries }) => {
+  rest: unknown
+}> = ({ isFocused, getEntries, ...rest }) => {
   const [content, setContent] = usePersistentState(`content`, ``)
 
   // text wrap logic (uses invisible element to calculate)
@@ -69,6 +70,7 @@ export const CurrentEntry: React.FC<{
       className={`flex flex-col sm:flex-row text-black ${
         isFocused ? `` : `text-opacity-50`
       }`}
+      {...rest}
     >
       <Clock />
 

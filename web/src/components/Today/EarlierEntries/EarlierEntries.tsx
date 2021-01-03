@@ -5,7 +5,8 @@ import { useWindowWidth } from 'src/hooks'
 export const EarlierEntries: React.FC<{
   isFocused: boolean
   entries: Entry[]
-}> = ({ isFocused, entries }) => {
+  rest: unknown
+}> = ({ isFocused, entries, ...rest }) => {
   // scroll to bottom of <output /> el on new entry
   const earlierEntriesOutputRef = useRef<HTMLOutputElement>()
   useEffect(() => {
@@ -32,8 +33,9 @@ export const EarlierEntries: React.FC<{
     [entries, earlierEntriesOutputRef, windowWidth]
   )
 
+  // TODO change text opacity of entries & the currentEntry input when earlierEntries is focused (so that the text isn't at half opacity when it's being scrolled)
   return entries ? (
-    <section ref={earlierEntriesSectionRef} className="relative">
+    <section ref={earlierEntriesSectionRef} className="relative" {...rest}>
       <output
         ref={earlierEntriesOutputRef}
         className={`ml-24 flex flex-col text-black ${
@@ -52,7 +54,7 @@ export const EarlierEntries: React.FC<{
       ) : null}
     </section>
   ) : (
-    <div className="pb-7 flex">
+    <div className="pb-7 flex" {...rest}>
       <span className="w-52 pr-5 sm:text-right">Loading...</span>
       <span className="flex-1" />
     </div>
