@@ -2,6 +2,8 @@
 
 ### Project ideas & TODOs
 
+- **IMPORTANT** the "enter" key code is different on Windows - add it to the submission logic
+- **IMPORTANT** if there aren't any posts, don't continue to show "Loading..." after the query returns
 - config options to either store journal locally (in `localStorage`) or log in through OAuth (Netlify)
 - system for unique keys across every array on HomePage
 - Implement some basic Storybook stories (at least to get a feel for the tool)
