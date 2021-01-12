@@ -15,6 +15,7 @@
 - It would be cool if the background amber/orange dimmed with the evening/night (e.g. transition `bg-amber-200` -> `bg-amber-400`, or similar)
 - Custom backgrounds? (Maybe different pastel colors)
 - improve the resolver logic for the optional `from`/`to` fields in the entries query (it's more verbose than it likely needs to be due to some prisma limitations)
+- API integrations for blogging platforms like Twitter, Facebook, etc.
 
 ### Notes & thoughts
 
