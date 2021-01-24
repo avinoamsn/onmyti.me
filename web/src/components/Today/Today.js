@@ -60,9 +60,6 @@ export const Today = ({ isFocused, setFocusedDate }) => {
       : setTodayEls([...elList.slice().reverse()])
   }, [isFocused, entries, getEntries])
 
-  console.log(
-    todayEls && `${todayEls[0].src.props.id + todayEls[1].src.props.id}`
-  )
   return (
     <div
       id="today"
